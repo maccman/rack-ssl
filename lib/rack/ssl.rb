@@ -38,6 +38,8 @@ module Rack
       def scheme(env)
         if env['HTTPS'] == 'on'
           'https'
+        elsif env['HTTP_X_FORWARDED_PORT'] == '443'
+          'https'
         elsif env['HTTP_X_FORWARDED_PROTO']
           env['HTTP_X_FORWARDED_PROTO'].split(',')[0]
         else
